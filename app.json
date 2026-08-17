@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "One Last Chance",
+    "slug": "one-last-chance",
+    "version": "1.0.0",
+    "platforms": ["ios"],
+    "orientation": "portrait",
+    "scheme": "onelastchance",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "bundleIdentifier": "com.github.hu553in.onelastchance",
+      "buildNumber": "39",
+      "icon": "./assets/app-icon.icon",
+      "supportsTablet": false,
+      "entitlements": {
+        "com.apple.developer.networking.networkextension": ["packet-tunnel-provider"]
+      }
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#F2F2F7",
+          "dark": {
+            "backgroundColor": "#000000"
+          }
+        }
+      ],
+      [
+        "expo-secure-store",
+        {
+          "faceIDPermission": false
+        }
+      ],
+      "@bacons/apple-targets"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}

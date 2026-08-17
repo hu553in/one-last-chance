@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>hu553in/common-things//presets/renovate/bun",
+    "github>hu553in/common-things//presets/renovate/go"
+  ],
+  "enabledManagers": ["bun", "custom.regex", "github-actions", "gomod"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Track the gomobile build tool",
+      "managerFilePatterns": ["/^scripts/build-runtime\\.sh$/"],
+      "matchStrings": ["gomobile_version=\"(?<currentValue>[^\"]+)\""],
+      "datasourceTemplate": "go",
+      "depNameTemplate": "golang.org/x/mobile",
+      "versioningTemplate": "loose"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Group Expo SDK updates",
+      "matchManagers": ["bun"],
+      "matchPackageNames": [
+        "@bacons/apple-targets",
+        "@expo/**",
+        "@types/react",
+        "expo",
+        "expo-*",
+        "react",
+        "react-native",
+        "react-native-*"
+      ],
+      "groupName": "Expo SDK"
+    },
+    {
+      "description": "Preserve the compatible olcRTC revision",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": ["github.com/openlibrecommunity/olcrtc"],
+      "enabled": false
+    }
+  ]
+}

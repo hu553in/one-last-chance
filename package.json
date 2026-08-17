@@ -1,0 +1,67 @@
+{
+  "name": "one-last-chance",
+  "version": "1.0.0",
+  "description": "Minimal iPhone client for connecting to olcRTC through one subscription URL.",
+  "author": "Ruslan Khasanshin",
+  "repository": "https://github.com/hu553in/one-last-chance",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": "24.x"
+  },
+  "main": "expo-router/entry",
+  "packageManager": "bun@1.3.14",
+  "scripts": {
+    "dev": "expo start",
+    "ios": "bun build:runtime && expo run:ios",
+    "build": "bash ./scripts/build-unsigned-ipa.sh",
+    "build:runtime": "bash ./scripts/build-runtime.sh",
+    "test": "tsx --test src/**/*.test.ts && cd native/one-last-chance-runtime && go test -race ./...",
+    "lint": "prettier -u -c . && eslint --cache --cache-location .cache/eslint --cache-strategy content --max-warnings 0 . && shfmt -d scripts/*.sh && bunx shellcheck scripts/*.sh && xcrun swift-format lint --recursive modules/olcrtc-vpn/ios native/olcrtc-tunnel-core/Sources targets/networkpackettunnel && cd native/one-last-chance-runtime && golangci-lint fmt --diff && golangci-lint run",
+    "lint:fix": "prettier -u -w . && eslint --cache --cache-location .cache/eslint --cache-strategy content --max-warnings 0 --fix . && shfmt -w scripts/*.sh && xcrun swift-format format --in-place --recursive modules/olcrtc-vpn/ios native/olcrtc-tunnel-core/Sources targets/networkpackettunnel && cd native/one-last-chance-runtime && golangci-lint fmt && golangci-lint run --fix",
+    "check:deps": "cd native/one-last-chance-runtime && go mod tidy -diff && go mod verify",
+    "check:expo": "bunx expo-doctor",
+    "check:hooks": "lefthook validate",
+    "check:renovate": "bunx --package renovate renovate-config-validator --strict --no-global renovate.json",
+    "check:types": "tsc --pretty --noEmit",
+    "check:unused": "knip",
+    "check:vulns": "bun audit --prod --audit-level=high --ignore GHSA-5p2g-fcmc-qvqq --ignore GHSA-w3rx-r6r6-pgpr && cd native/one-last-chance-runtime && go tool govulncheck ./...",
+    "check:workflows": "bunx github-actionlint",
+    "check": "bun lint && bun check:hooks && bun check:workflows && bun check:renovate && bun check:expo && bun check:types && bun check:deps && bun run test && bun check:unused && bun check:vulns && bun run build",
+    "check:fix": "bun lint:fix && bun check",
+    "prepare": "if [ -n \"${CI:-}\" ] || [ \"${LEFTHOOK:-}\" = \"0\" ]; then exit 0; fi; lefthook install"
+  },
+  "dependencies": {
+    "@bacons/apple-targets": "^5.0.0",
+    "expo": "~57.0.13",
+    "expo-clipboard": "~57.0.1",
+    "expo-constants": "~57.0.11",
+    "expo-font": "~57.0.1",
+    "expo-haptics": "~57.0.1",
+    "expo-linking": "~57.0.6",
+    "expo-router": "~57.0.13",
+    "expo-secure-store": "~57.0.1",
+    "expo-splash-screen": "~57.0.6",
+    "expo-symbols": "~57.0.2",
+    "react": "19.2.3",
+    "react-native": "0.86.2",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@types/react": "~19.2.18",
+    "eslint": "^9.39.5",
+    "eslint-config-expo": "~57.0.1",
+    "eslint-config-prettier": "^10.1.8",
+    "knip": "^6.32.2",
+    "lefthook": "^2.1.10",
+    "prettier": "^3.9.6",
+    "tsx": "^4.23.12",
+    "typescript": "~6.0.3"
+  },
+  "overrides": {
+    "@expo/require-utils": "~57.0.4",
+    "@xmldom/xmldom": "^0.8.13"
+  }
+}

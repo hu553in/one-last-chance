@@ -1,0 +1,6 @@
+{
+  "$schema": "./node_modules/knip/schema.json",
+  "entry": ["targets/networkpackettunnel/expo-target.config.js"],
+  "ignoreBinaries": ["go", "golangci-lint", "shfmt"],
+  "ignoreDependencies": ["@commitlint/cli", "expo-updates", "renovate"]
+}

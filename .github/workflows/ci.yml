@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: macos-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: native/one-last-chance-runtime/go.mod
+          cache-dependency-path: native/one-last-chance-runtime/go.sum
+      - uses: golangci/golangci-lint-action@v9
+        with:
+          install-only: true
+      - run: go install mvdan.cc/sh/v3/cmd/shfmt@latest
+      - run: bun ci
+      - uses: actions/cache@v6
+        env:
+          ESLINT_CACHE_KEY: eslint|${{ runner.os }}|${{ hashFiles('bun.lock', 'eslint.config.*') }}
+        with:
+          path: .cache/eslint
+          key: ${{ env.ESLINT_CACHE_KEY }}|${{ github.sha }}
+          restore-keys: |
+            ${{ env.ESLINT_CACHE_KEY }}|
+      - uses: actions/cache@v6
+        env:
+          GOMOBILE_CACHE_KEY: gomobile|${{ runner.os }}|${{ runner.arch }}
+        with:
+          path: .cache/tools
+          key: >-
+            ${{ env.GOMOBILE_CACHE_KEY }}|${{ hashFiles('scripts/build-runtime.sh',
+            'native/one-last-chance-runtime/go.mod') }}
+      - run: bun check
+      - uses: actions/upload-artifact@v7
+        with:
+          name: one-last-chance-unsigned-${{ github.sha }}
+          path: dist/OneLastChance-unsigned.ipa
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 90
