@@ -2,6 +2,7 @@ import * as Haptics from 'expo-haptics';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AppState } from 'react-native';
 
+import { errorMessage } from '@/lib/error';
 import OlcRtcVpn, { type VPNConfigSummary, type VPNStatus } from '@/native/olcrtc-vpn';
 import {
   installSubscription,
@@ -126,8 +127,4 @@ export function useVPN() {
     connect,
     disconnect,
   };
-}
-
-function errorMessage(error: unknown) {
-  return error instanceof Error ? error.message : String(error);
 }

@@ -9,18 +9,23 @@ Paste an HTTPS `sub.md` URL, choose a compatible node, and connect. The Expo int
 native iOS Packet Tunnel backed by the pinned [olcRTC](https://github.com/openlibrecommunity/olcrtc)
 mobile runtime; SOCKS and routing details stay out of the user interface.
 
-> [!IMPORTANT] One Last Chance supports iPhone with iOS 16.4 or newer. Android, iPad, macOS,
-> landscape mode, and languages other than English are not supported.
+> [!IMPORTANT]
+>
+> One Last Chance supports iPhone with iOS 16.4 or newer. Android, iPad, macOS, landscape mode, and
+> languages other than English are not supported.
 
-> [!WARNING] The repository builds an unsigned IPA. You must sign it with a certificate and a
-> provisioning profile that permit a Packet Tunnel Provider before installing it on an iPhone. A
-> Simulator build cannot verify device-wide VPN traffic.
+> [!WARNING]
+>
+> The repository builds an unsigned IPA. You must sign it with a certificate and a provisioning
+> profile that permit a Packet Tunnel Provider before installing it on an iPhone. A Simulator build
+> cannot verify device-wide VPN traffic.
 
 ## Features
 
 - One saved HTTPS subscription URL with manual refresh
 - Manual selection of one supported node
 - One-tap connect and disconnect through an iOS Packet Tunnel
+- Public IPv4 address and country shown only while connected, with manual retry on failure
 - Local lifecycle logs with Copy and Clear actions
 - No account, analytics, telemetry, remote logs, or exposed SOCKS settings
 
@@ -35,9 +40,24 @@ mobile runtime; SOCKS and routing details stay out of the user interface.
 The app does not install or administer an olcRTC server. Obtain the server and subscription URL
 separately.
 
+## Install the CI build
+
+Every successful CI run uploads a ready-to-sign IPA:
+
+1. Sign in to GitHub, open the
+   [CI runs for `main`](https://github.com/hu553in/one-last-chance/actions/workflows/ci.yml?query=branch%3Amain),
+   and select the latest successful run.
+2. In **Artifacts**, download `one-last-chance-unsigned-<commit SHA>`.
+3. Extract the outer archive downloaded from GitHub. It contains `OneLastChance-unsigned.ipa`; do
+   not extract the IPA itself.
+4. Sign the IPA with a certificate and provisioning profile that permit a Packet Tunnel Provider,
+   and install it on the iPhone.
+
+Artifacts are retained for 90 days and are tied to the exact commit shown in the workflow run.
+
 ## Usage
 
-1. Sign and install the generated IPA.
+1. Sign and install the downloaded or locally built IPA.
 2. Paste the HTTPS subscription URL and tap **Save**.
 3. If the subscription contains several compatible nodes, choose the node to use.
 4. Tap **Connect** and approve the iOS VPN configuration when prompted.
@@ -84,8 +104,9 @@ subscription refresh are intentionally absent.
   fastest-node selection, or failover.
 
 Connected means the selected node started its local SOCKS listener, iOS accepted the IPv4 tunnel
-settings, and packet forwarding survived the startup check. The app does not contact an external
-website to claim broader internet reachability.
+settings, and packet forwarding survived the startup check. After that status is reached, the app
+checks the public IPv4 address for display only. The check does not decide the VPN status or claim
+broader internet reachability; failure only shows a retry button.
 
 ## Privacy and logs
 
@@ -94,6 +115,10 @@ keys, is stored in NetworkExtension preferences. Logs remain in local Applicatio
 for the app and extension; key-shaped values and common secret fields are redacted before writing.
 The log view records lifecycle and runtime events, not packet contents.
 
+While Connected, the app asks `api.ipify.org` for its public IPv4 address and passes that address to
+`api.country.is` to obtain a country code. The result is neither persisted nor written to logs, and
+any in-flight request is cancelled as soon as the VPN leaves Connected.
+
 olcRTC receives a random UUID client identifier generated and stored by the extension. It is not
 derived from the phone's hardware identifier.
 
@@ -101,9 +126,8 @@ derived from the phone's hardware identifier.
 
 The client pins olcRTC commit
 [`2f2db04c332667ac43ad0f9e99d76c1bd8bd3248`](https://github.com/openlibrecommunity/olcrtc/commit/2f2db04c332667ac43ad0f9e99d76c1bd8bd3248),
-from before the incompatible resolver and global transport refactors. The paired server in
-[`single-deployment`](https://github.com/hu553in/single-deployment) is pinned to the same revision.
-Compatibility with the current olcRTC `master` branch is not claimed.
+from before the incompatible resolver and global transport refactors. Servers must use a
+wire-compatible revision. Compatibility with the current olcRTC `master` branch is not claimed.
 
 Tun2SocksKit remains pinned to 5.14.4 because 5.16.0 enables a UDP path that is incompatible with
 this runtime. Update either compatibility pin only after testing the matching server and a signed
@@ -142,7 +166,7 @@ bun check
 
 - `bun dev` starts Expo development tools.
 - `bun ios` builds the Go runtime, then generates and runs the iOS app locally.
-- `bun run test` runs subscription parser tests and Go runtime tests with the race detector.
+- `bun run test` runs TypeScript unit tests and Go runtime tests with the race detector.
 - `bun check` runs formatting, linting, configuration validation, Expo Doctor, TypeScript, tests, Go
   checks, unused-code analysis, dependency audits, and the complete unsigned IPA build.
 - `bun check:fix` applies formatter and linter fixes before running the same full gate.
