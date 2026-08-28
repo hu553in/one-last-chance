@@ -1,11 +1,12 @@
 module github.com/hu553in/one-last-chance/runtime
 
-go 1.26.6
+go 1.27.0
 
-// Keep this revision aligned with the server deployed by hu553in/single-deployment.
-require github.com/openlibrecommunity/olcrtc v0.0.0-20260723013544-2f2db04c3326
-
-require github.com/google/uuid v1.6.0
+require (
+	github.com/google/uuid v1.6.0
+	// Keep this revision aligned with the server deployed by hu553in/single-deployment.
+	github.com/openlibrecommunity/olcrtc v0.0.0-20260723013544-2f2db04c3326
+)
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260415201107-50325440f8f2.1 // indirect

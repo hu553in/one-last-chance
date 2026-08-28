@@ -8,9 +8,9 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Track the gomobile build tool",
+      "description": "Track gomobile build tool",
       "managerFilePatterns": ["/^scripts/build-runtime\\.sh$/"],
-      "matchStrings": ["gomobile_version=\"(?<currentValue>[^\"]+)\""],
+      "matchStrings": ["gomobile_version=\"(?<currentValue>[^\"\\r\\n]+)\""],
       "datasourceTemplate": "go",
       "depNameTemplate": "golang.org/x/mobile",
       "versioningTemplate": "loose"
@@ -18,12 +18,21 @@
   ],
   "packageRules": [
     {
+      "description": "Keep Node typings on the declared runtime major",
+      "matchManagers": ["bun"],
+      "matchPackageNames": ["@types/node"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
       "description": "Group Expo SDK updates",
       "matchManagers": ["bun"],
       "matchPackageNames": [
         "@bacons/apple-targets",
         "@expo/**",
+        "@react-native/**",
         "@types/react",
+        "eslint-config-expo",
         "expo",
         "expo-*",
         "react",
@@ -31,6 +40,32 @@
         "react-native-*"
       ],
       "groupName": "Expo SDK"
+    },
+    {
+      "description": "Disable automatic Expo SDK major updates",
+      "matchManagers": ["bun"],
+      "matchPackageNames": [
+        "@bacons/apple-targets",
+        "@expo/**",
+        "eslint-config-expo",
+        "expo",
+        "expo-*"
+      ],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "description": "Disable automatic React and React Native core updates",
+      "matchManagers": ["bun"],
+      "matchPackageNames": ["@react-native/**", "react", "react-native"],
+      "enabled": false
+    },
+    {
+      "description": "Disable automatic React Native companion minor and major updates",
+      "matchManagers": ["bun"],
+      "matchPackageNames": ["@types/react", "react-native-*"],
+      "matchUpdateTypes": ["minor", "major"],
+      "enabled": false
     },
     {
       "description": "Preserve the compatible olcRTC revision",

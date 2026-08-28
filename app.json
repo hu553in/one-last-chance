@@ -33,7 +33,8 @@
           "faceIDPermission": false
         }
       ],
-      "@bacons/apple-targets"
+      "@bacons/apple-targets",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true,
