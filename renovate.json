@@ -25,6 +25,12 @@
       "enabled": false
     },
     {
+      "description": "Preserve the Expo-compatible xmldom line",
+      "matchManagers": ["bun"],
+      "matchPackageNames": ["@xmldom/xmldom"],
+      "allowedVersions": "<0.9.0"
+    },
+    {
       "description": "Group Expo SDK updates",
       "matchManagers": ["bun"],
       "matchPackageNames": [
