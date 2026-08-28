@@ -3,7 +3,7 @@ set -euo pipefail
 
 project_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 runtime_dir="$project_dir/native/one-last-chance-runtime"
-gomobile_version="v0.0.0-20260813181013-1960c775504c"
+gomobile_version="v0.0.0-20260821190718-4776eadac327"
 frameworks_dir="$project_dir/native/olcrtc-tunnel-core/Frameworks"
 framework_path="$frameworks_dir/OneLastChanceRuntime.xcframework"
 tool_dir="$project_dir/.cache/tools"
