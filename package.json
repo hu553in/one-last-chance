@@ -64,6 +64,6 @@
   },
   "overrides": {
     "@expo/require-utils": "~57.0.4",
-    "@xmldom/xmldom": "^0.8.13"
+    "@xmldom/xmldom": "^0.8.15"
   }
 }
