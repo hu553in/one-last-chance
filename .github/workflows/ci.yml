@@ -7,6 +7,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref_type != 'tag' }}
+
 jobs:
   check:
     runs-on: macos-latest
@@ -26,16 +30,9 @@ jobs:
       - uses: golangci/golangci-lint-action@v9
         with:
           install-only: true
-      - run: go install mvdan.cc/sh/v3/cmd/shfmt@latest
+      - uses: hu553in/common-things/.github/actions/setup-shfmt@main
       - run: bun ci
-      - uses: actions/cache@v6
-        env:
-          ESLINT_CACHE_KEY: eslint|${{ runner.os }}|${{ hashFiles('bun.lock', 'eslint.config.*') }}
-        with:
-          path: .cache/eslint
-          key: ${{ env.ESLINT_CACHE_KEY }}|${{ github.sha }}
-          restore-keys: |
-            ${{ env.ESLINT_CACHE_KEY }}|
+      - uses: hu553in/common-things/.github/actions/cache-eslint@main
       - uses: actions/cache@v6
         env:
           GOMOBILE_CACHE_KEY: gomobile|${{ runner.os }}|${{ runner.arch }}
