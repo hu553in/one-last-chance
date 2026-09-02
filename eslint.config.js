@@ -17,6 +17,11 @@ module.exports = defineConfig([
     linterOptions: {
       reportUnusedDisableDirectives: 'error',
     },
+    settings: {
+      react: {
+        version: '19',
+      },
+    },
   },
   eslintConfigPrettier,
 ]);
