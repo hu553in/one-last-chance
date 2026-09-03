@@ -25,7 +25,7 @@ mobile runtime; SOCKS and routing details stay out of the user interface.
 - One saved HTTPS subscription URL with manual refresh
 - Manual selection of one supported node
 - One-tap connect and disconnect through an iOS Packet Tunnel
-- Public IPv4 address and country shown only while connected, with manual retry on failure
+- Public IPv4 address and country shown only while connected, with a refresh button
 - Local lifecycle logs with Copy and Clear actions
 - No account, analytics, telemetry, remote logs, or exposed SOCKS settings
 
@@ -106,7 +106,9 @@ subscription refresh are intentionally absent.
 Connected means the selected node started its local SOCKS listener, iOS accepted the IPv4 tunnel
 settings, and packet forwarding survived the startup check. After that status is reached, the app
 checks the public IPv4 address for display only. The check does not decide the VPN status or claim
-broader internet reachability; failure only shows a retry button.
+broader internet reachability. The refresh button repeats the check, including after a failure, and
+is disabled while a check is running. The previous IP and country stay visible during refresh; a
+failed check replaces them with "IP unavailable".
 
 ## Privacy and logs
 

@@ -332,11 +332,21 @@ export default function HomeScreen() {
 }
 
 type PublicIPState =
-  { status: 'loading' } | { status: 'success'; value: PublicIP } | { status: 'error' };
+  | { status: 'loading'; value?: PublicIP }
+  | { status: 'success'; value: PublicIP }
+  | { status: 'error' };
 
 function PublicIPAddress() {
   const [attempt, setAttempt] = useState(0);
   const [state, setState] = useState<PublicIPState>({ status: 'loading' });
+  const isLoading = state.status === 'loading';
+  const value = state.status === 'error' ? undefined : state.value;
+
+  const refresh = () => {
+    if (isLoading) return;
+    setState({ status: 'loading', value });
+    setAttempt(value => value + 1);
+  };
 
   useEffect(() => {
     let active = true;
@@ -359,43 +369,42 @@ function PublicIPAddress() {
     };
   }, [attempt]);
 
-  if (state.status === 'loading') {
-    return (
-      <View
-        accessible
-        accessibilityLabel="Checking public IP"
-        accessibilityRole="progressbar"
-        style={styles.publicIPRow}
-      >
-        <ActivityIndicator size="small" />
-        <Text style={styles.publicIPStatus}>Checking public IP…</Text>
-      </View>
-    );
-  }
-
-  if (state.status === 'error') {
-    return (
-      <Pressable
-        accessibilityRole="button"
-        onPress={() => {
-          setState({ status: 'loading' });
-          setAttempt(value => value + 1);
-        }}
-        style={({ pressed }) => [styles.publicIPRetry, pressed && styles.pressed]}
-      >
-        <Text style={styles.publicIPRetryText}>Retry IP check</Text>
-      </Pressable>
-    );
-  }
-
   return (
-    <Text
-      accessibilityLabel={`Public IP ${state.value.address}, country ${state.value.country}`}
-      selectable
-      style={styles.publicIPValue}
-    >
-      {state.value.address} · {state.value.country}
-    </Text>
+    <View style={styles.publicIPRow}>
+      <Text
+        accessibilityLabel={
+          value ? `Public IP ${value.address}, country ${value.country}` : undefined
+        }
+        selectable={!!value}
+        style={[styles.publicIPText, value && styles.publicIPValue]}
+      >
+        {value
+          ? `${value.address} · ${value.country}`
+          : isLoading && attempt === 0
+            ? 'Checking public IP…'
+            : 'IP unavailable'}
+      </Text>
+      <Pressable
+        accessibilityLabel="Refresh public IP"
+        accessibilityRole="button"
+        accessibilityState={{ busy: isLoading, disabled: isLoading }}
+        disabled={isLoading}
+        onPress={refresh}
+        style={({ pressed }) => [styles.publicIPRefresh, pressed && styles.pressed]}
+      >
+        {isLoading ? (
+          <ActivityIndicator color={colors.secondaryLabel} size="small" />
+        ) : (
+          <SymbolView
+            accessibilityElementsHidden
+            name="arrow.clockwise"
+            size={20}
+            tintColor={colors.blue}
+            weight="semibold"
+          />
+        )}
+      </Pressable>
+    </View>
   );
 }
 
@@ -492,25 +501,26 @@ const styles = StyleSheet.create({
     marginTop: spacing.x1,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.x2,
+    gap: spacing.x1,
   },
-  publicIPStatus: { color: colors.secondaryLabel, fontSize: 14, lineHeight: 20 },
+  publicIPText: {
+    color: colors.secondaryLabel,
+    fontSize: 14,
+    lineHeight: 20,
+    flexShrink: 1,
+    textAlign: 'center',
+  },
   publicIPValue: {
-    minHeight: 44,
-    marginTop: spacing.x1,
     color: colors.label,
     fontFamily: 'ui-monospace',
-    fontSize: 14,
-    lineHeight: 44,
     fontVariant: ['tabular-nums'],
   },
-  publicIPRetry: {
+  publicIPRefresh: {
+    minWidth: 44,
     minHeight: 44,
-    marginTop: spacing.x1,
+    alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: spacing.x2,
   },
-  publicIPRetryText: { color: colors.blue, fontSize: 14, lineHeight: 20, fontWeight: '600' },
   card: {
     backgroundColor: colors.surface,
     borderRadius: radii.card,
