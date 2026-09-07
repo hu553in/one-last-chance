@@ -1,6 +1,6 @@
 module github.com/hu553in/one-last-chance/runtime
 
-go 1.27.0
+go 1.27.1
 
 require (
 	github.com/google/uuid v1.6.0
