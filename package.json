@@ -25,7 +25,7 @@
     "check:renovate": "bunx --package renovate renovate-config-validator --strict --no-global renovate.json",
     "check:types": "tsc --pretty --noEmit",
     "check:unused": "knip",
-    "check:vulns": "bun audit --prod --audit-level=high --ignore GHSA-5p2g-fcmc-qvqq --ignore GHSA-w3rx-r6r6-pgpr && cd native/one-last-chance-runtime && go tool govulncheck ./...",
+    "check:vulns": "bun audit --prod --audit-level=high && cd native/one-last-chance-runtime && go tool govulncheck ./...",
     "check:workflows": "bunx github-actionlint",
     "check": "bun lint && bun check:hooks && bun check:workflows && bun check:renovate && bun check:expo && bun check:types && bun check:deps && bun run test && bun check:unused && bun check:vulns && bun run build",
     "check:fix": "bun lint:fix && bun check",

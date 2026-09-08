@@ -174,18 +174,8 @@ linters:
 
     mnd:
       ignored-functions:
-        - args.Error
-        - flag.Arg
-        - flag.Duration.*
-        - flag.Float.*
-        - flag.Int.*
-        - flag.Uint.*
-        - os.Chmod
         - os.Mkdir.*
-        - os.OpenFile
         - os.WriteFile
-        - prometheus.ExponentialBuckets.*
-        - prometheus.LinearBuckets
 
     nakedret:
       max-func-lines: 0
@@ -201,10 +191,6 @@ linters:
     reassign:
       patterns:
         - '.*'
-
-    rowserrcheck:
-      packages:
-        - github.com/jmoiron/sqlx
 
     sloglint:
       no-global: all
@@ -223,7 +209,6 @@ linters:
   exclusions:
     presets:
       - std-error-handling
-      - common-false-positives
     rules:
       - text: 'should have a package comment'
         linters: [revive]
@@ -237,5 +222,4 @@ linters:
           - errcheck
           - funlen
           - goconst
-          - gosec
           - noctx

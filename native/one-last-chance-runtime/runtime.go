@@ -183,7 +183,7 @@ func (r *Runtime) fail(generation uint64, message string) {
 }
 
 func loadOrCreateDeviceID(path string) (string, error) {
-	data, readErr := os.ReadFile(path)
+	data, readErr := os.ReadFile(path) // #nosec G304 -- The native app supplies its private device-ID file path.
 	if readErr == nil {
 		if id := strings.TrimSpace(string(data)); id != "" {
 			return id, nil
