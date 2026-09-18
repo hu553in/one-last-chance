@@ -33,13 +33,13 @@
   },
   "dependencies": {
     "@bacons/apple-targets": "^5.0.0",
-    "expo": "~57.0.22",
+    "expo": "~57.0.24",
     "expo-clipboard": "~57.0.2",
-    "expo-constants": "~57.0.18",
+    "expo-constants": "~57.0.19",
     "expo-font": "~57.0.4",
     "expo-haptics": "~57.0.3",
     "expo-linking": "~57.0.10",
-    "expo-router": "~57.0.21",
+    "expo-router": "~57.0.22",
     "expo-secure-store": "~57.0.4",
     "expo-splash-screen": "~57.0.9",
     "expo-symbols": "~57.0.3",
@@ -47,23 +47,23 @@
     "react-native": "0.86.3",
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "~4.26.2",
-    "zod": "^4.4.3"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
-    "@react-native/metro-config": "0.86.2",
-    "@types/node": "^24.13.3",
+    "@react-native/metro-config": "0.86.3",
+    "@types/node": "^24.13.5",
     "@types/react": "~19.2.18",
-    "eslint": "^10.0.0",
+    "eslint": "^10.10.0",
     "eslint-config-expo": "~57.0.2",
     "eslint-config-prettier": "^10.1.8",
-    "knip": "^6.32.2",
-    "lefthook": "^2.1.10",
-    "prettier": "^3.9.6",
-    "tsx": "^4.23.12",
+    "knip": "^6.37.0",
+    "lefthook": "^2.1.14",
+    "prettier": "^3.9.8",
+    "tsx": "^4.23.13",
     "typescript": "~6.0.3"
   },
   "overrides": {
-    "@expo/require-utils": "~57.0.4",
+    "@expo/require-utils": "~57.0.5",
     "@xmldom/xmldom": "^0.8.15"
   }
 }

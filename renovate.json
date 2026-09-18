@@ -8,15 +8,20 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Track gomobile build tool",
-      "managerFilePatterns": ["/^scripts/build-runtime\\.sh$/"],
-      "matchStrings": ["gomobile_version=\"(?<currentValue>[^\"\\r\\n]+)\""],
-      "datasourceTemplate": "go",
-      "depNameTemplate": "golang.org/x/mobile",
-      "versioningTemplate": "loose"
+      "description": "Track Tun2SocksKit podspec releases",
+      "managerFilePatterns": ["/^targets/networkpackettunnel/pods\\.rb$/"],
+      "matchStrings": [
+        "https://raw\\.githubusercontent\\.com/(?<depName>EbrahimTahernejad/Tun2SocksKit)/(?<currentValue>[^/'\"\\s]+)/Tun2SocksKit\\.podspec"
+      ],
+      "datasourceTemplate": "github-tags"
     }
   ],
   "packageRules": [
+    {
+      "description": "Group Bun runtime updates",
+      "matchPackageNames": ["@types/bun", "bun", "oven/bun"],
+      "groupName": "Bun runtime"
+    },
     {
       "description": "Keep Node typings on the declared runtime major",
       "matchManagers": ["bun"],
@@ -74,7 +79,37 @@
       "enabled": false
     },
     {
-      "description": "Preserve the compatible olcRTC revision",
+      "description": "Update indirect Go dependencies",
+      "matchManagers": ["gomod"],
+      "matchDepTypes": ["indirect"],
+      "enabled": true
+    },
+    {
+      "description": "Keep ICE compatible with WebRTC's transport/v4 API",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": ["github.com/pion/ice/v4"],
+      "allowedVersions": "<4.4.3"
+    },
+    {
+      "description": "Keep SRTP compatible with WebRTC's transport/v4 API",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": ["github.com/pion/srtp/v3"],
+      "allowedVersions": "<3.0.16"
+    },
+    {
+      "description": "Keep TURN compatible with ICE's transport/v4 API",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": ["github.com/pion/turn/v5"],
+      "allowedVersions": "<5.1.2"
+    },
+    {
+      "description": "Preserve owenlivekit's TransferSIPParticipant return type",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": ["github.com/livekit/protocol"],
+      "allowedVersions": "<1.51.0"
+    },
+    {
+      "description": "Keep the final archived olcRTC revision aligned with the server",
       "matchManagers": ["gomod"],
       "matchPackageNames": ["github.com/openlibrecommunity/olcrtc"],
       "enabled": false

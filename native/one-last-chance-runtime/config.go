@@ -81,7 +81,7 @@ func (n *node) validate() error {
 	switch n.Transport {
 	case transportData, transportVP8:
 	default:
-		return fmt.Errorf("transport %q is unavailable in the pinned stable mobile runtime", n.Transport)
+		return fmt.Errorf("transport %q is not supported by this app", n.Transport)
 	}
 	if n.Transport == transportData && n.Provider != providerJitsi {
 		return fmt.Errorf("datachannel is unavailable with provider %q in the guest mobile runtime", n.Provider)

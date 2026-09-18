@@ -33,14 +33,6 @@ jobs:
       - uses: hu553in/common-things/.github/actions/setup-shfmt@main
       - run: bun ci
       - uses: hu553in/common-things/.github/actions/cache-eslint@main
-      - uses: actions/cache@v6
-        env:
-          GOMOBILE_CACHE_KEY: gomobile|${{ runner.os }}|${{ runner.arch }}
-        with:
-          path: .cache/tools
-          key: >-
-            ${{ env.GOMOBILE_CACHE_KEY }}|${{ hashFiles('scripts/build-runtime.sh',
-            'native/one-last-chance-runtime/go.mod') }}
       - run: bun check
       - uses: actions/upload-artifact@v7
         with:

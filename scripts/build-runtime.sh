@@ -3,12 +3,8 @@ set -euo pipefail
 
 project_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 runtime_dir="$project_dir/native/one-last-chance-runtime"
-gomobile_version="v0.0.0-20260821190718-4776eadac327"
 frameworks_dir="$project_dir/native/olcrtc-tunnel-core/Frameworks"
 framework_path="$frameworks_dir/OneLastChanceRuntime.xcframework"
-tool_dir="$project_dir/.cache/tools"
-gomobile_dir="$tool_dir/$gomobile_version"
-gomobile_path="$gomobile_dir/gomobile"
 
 for command_name in go xcodebuild; do
   command -v "$command_name" >/dev/null || {
@@ -17,20 +13,16 @@ for command_name in go xcodebuild; do
   }
 done
 
-mkdir -p "$frameworks_dir" "$gomobile_dir"
-if [[ ! -x "$gomobile_path" ]]; then
-  echo "Installing pinned gomobile $gomobile_version"
-  GOBIN="$gomobile_dir" go install "golang.org/x/mobile/cmd/gomobile@$gomobile_version"
-fi
-"$gomobile_path" init
-
 temporary_dir="$(mktemp -d "${TMPDIR:-/tmp}/one-last-chance-runtime.XXXXXX")"
 trap 'rm -rf "$temporary_dir"' EXIT
 
-echo "Building OneLastChanceRuntime.xcframework"
 (
   cd "$runtime_dir"
-  CGO_ENABLED=1 "$gomobile_path" bind \
+  echo "Installing gomobile and gobind"
+  GOBIN="$temporary_dir" go install golang.org/x/mobile/cmd/gomobile golang.org/x/mobile/cmd/gobind
+
+  echo "Building OneLastChanceRuntime.xcframework"
+  PATH="$temporary_dir:$PATH" CGO_ENABLED=1 "$temporary_dir/gomobile" bind \
     -target=ios,iossimulator \
     -trimpath \
     -ldflags='-s -w -checklinkname=0' \
@@ -47,6 +39,7 @@ for binary in \
   }
 done
 
+mkdir -p "$frameworks_dir"
 rm -rf "$framework_path"
 /usr/bin/ditto "$temporary_dir/OneLastChanceRuntime.xcframework" "$framework_path"
 echo "Built $framework_path"

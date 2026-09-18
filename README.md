@@ -95,7 +95,8 @@ subscription refresh are intentionally absent.
 
 ## Network behavior
 
-- All regular IPv4 device traffic uses the Packet Tunnel; loopback traffic is excluded.
+- IPv4 device traffic is routed into the Packet Tunnel; loopback traffic is excluded. olcRTC
+  forwards TCP only: general UDP traffic, including QUIC, is unsupported.
 - The internal SOCKS5 listener runs on `127.0.0.1:21080` and is not configurable from the app.
 - Tun2socks uses `198.18.0.2` for internal DNS handling and `100.64.0.0/10` for fake IP addresses.
 - IPv6 tunneling, split tunneling, custom routes, custom DNS, kill switch, and iOS On Demand are not
@@ -121,19 +122,18 @@ While Connected, the app asks `api.ipify.org` for its public IPv4 address and pa
 `api.country.is` to obtain a country code. The result is neither persisted nor written to logs, and
 any in-flight request is cancelled as soon as the VPN leaves Connected.
 
-olcRTC receives a random UUID client identifier generated and stored by the extension. It is not
-derived from the phone's hardware identifier.
+olcRTC generates and persists a random UUID in the extension's device-ID file, reusing existing IDs.
+It is not derived from the phone's hardware identifier.
 
 ## Compatibility
 
 The client pins olcRTC commit
-[`2f2db04c332667ac43ad0f9e99d76c1bd8bd3248`](https://github.com/openlibrecommunity/olcrtc/commit/2f2db04c332667ac43ad0f9e99d76c1bd8bd3248),
-from before the incompatible resolver and global transport refactors. Servers must use a
-wire-compatible revision. Compatibility with the current olcRTC `master` branch is not claimed.
+[`92b2332769c3dd5000584366201572efc448065f`](https://github.com/openlibrecommunity/olcrtc/commit/92b2332769c3dd5000584366201572efc448065f),
+the final revision of the archived upstream repository. Its OLC2 protocol is incompatible with the
+previously pinned client and server. Upgrade both sides together; existing subscription keys and
+device IDs are preserved.
 
-Tun2SocksKit remains pinned to 5.14.4 because 5.16.0 enables a UDP path that is incompatible with
-this runtime. Update either compatibility pin only after testing the matching server and a signed
-build on a physical iPhone.
+Verify the matching server and a signed build on a physical iPhone before rollout.
 
 ## Build from source
 
