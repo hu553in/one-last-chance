@@ -35,13 +35,11 @@ require (
 	github.com/livekit/mageutil v0.0.0-20250511045019-0f1ff63f7731 // indirect
 	github.com/livekit/mediatransportutil v0.0.0-20260821083140-f234b534b095 // indirect
 	github.com/livekit/protocol v1.50.4 // indirect
-	github.com/livekit/psrpc v0.7.7 // indirect
+	github.com/livekit/psrpc v0.8.0 // indirect
 	github.com/magefile/mage v1.17.2 // indirect
 	github.com/makiuchi-d/gozxing v0.1.1 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
-	github.com/nats-io/nats.go v1.53.1 // indirect
-	github.com/nats-io/nkeys v0.4.16 // indirect
-	github.com/nats-io/nuid v1.0.1 // indirect
+	github.com/nats-io/nats.go v1.54.0 // indirect
 	github.com/owenewans/owenlivekit/v2 v2.18.2 // indirect
 	github.com/pion/datachannel v1.6.3 // indirect
 	github.com/pion/dtls/v3 v3.1.9 // indirect
@@ -52,12 +50,12 @@ require (
 	github.com/pion/randutil v0.1.0 // indirect
 	github.com/pion/rtcp v1.2.17 // indirect
 	github.com/pion/rtp v1.10.5 // indirect
-	github.com/pion/sctp v1.11.2 // indirect
+	github.com/pion/sctp v1.11.3 // indirect
 	github.com/pion/sdp/v3 v3.0.20 // indirect
 	github.com/pion/srtp/v3 v3.0.15 // indirect
 	github.com/pion/stun/v4 v4.0.1 // indirect
 	github.com/pion/transport/v4 v4.1.1 // indirect
-	github.com/pion/transport/v5 v5.0.1 // indirect
+	github.com/pion/transport/v5 v5.1.0 // indirect
 	github.com/pion/turn/v5 v5.1.1 // indirect
 	github.com/pion/webrtc/v4 v4.2.20 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
