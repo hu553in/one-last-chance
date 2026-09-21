@@ -1,7 +1,7 @@
 {
   "name": "one-last-chance",
   "version": "1.0.0",
-  "description": "Minimal iPhone client for connecting to olcRTC through one subscription URL.",
+  "description": "iPhone VPN client for olcRTC, configured through a single subscription URL.",
   "author": "Ruslan Khasanshin",
   "repository": "https://github.com/hu553in/one-last-chance",
   "license": "MIT",

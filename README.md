@@ -3,7 +3,7 @@
 [![CI](https://github.com/hu553in/one-last-chance/actions/workflows/ci.yml/badge.svg)](https://github.com/hu553in/one-last-chance/actions/workflows/ci.yml)
 [![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/hu553in/one-last-chance?filename=native%2Fone-last-chance-runtime%2Fgo.mod)](https://github.com/hu553in/one-last-chance/blob/main/native/one-last-chance-runtime/go.mod)
 
-Minimal iPhone client for connecting to olcRTC through one subscription URL.
+iPhone VPN client for olcRTC, configured through a single subscription URL.
 
 Paste an HTTPS `sub.md` URL, choose a compatible node, and connect. The Expo interface controls a
 native iOS Packet Tunnel backed by the pinned [olcRTC](https://github.com/openlibrecommunity/olcrtc)
