@@ -2,7 +2,8 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>hu553in/common-things//presets/renovate/bun",
-    "github>hu553in/common-things//presets/renovate/go"
+    "github>hu553in/common-things//presets/renovate/go",
+    "helpers:disableTypesNodeMajor"
   ],
   "enabledManagers": ["bun", "custom.regex", "github-actions", "gomod"],
   "customManagers": [
@@ -23,9 +24,9 @@
       "groupName": "Bun runtime"
     },
     {
-      "description": "Keep Node typings on the declared runtime major",
+      "description": "Disable automatic TypeScript major updates",
       "matchManagers": ["bun"],
-      "matchPackageNames": ["@types/node"],
+      "matchPackageNames": ["typescript"],
       "matchUpdateTypes": ["major"],
       "enabled": false
     },
@@ -77,12 +78,6 @@
       "matchPackageNames": ["@types/react", "react-native-*"],
       "matchUpdateTypes": ["minor", "major"],
       "enabled": false
-    },
-    {
-      "description": "Update indirect Go dependencies",
-      "matchManagers": ["gomod"],
-      "matchDepTypes": ["indirect"],
-      "enabled": true
     },
     {
       "description": "Keep ICE compatible with WebRTC's transport/v4 API",
