@@ -80,6 +80,12 @@
       "enabled": false
     },
     {
+      "description": "Keep WebRTC compatible with olcRTC's transport/v4 API",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": ["github.com/pion/webrtc/v4"],
+      "allowedVersions": "<4.2.21"
+    },
+    {
       "description": "Keep ICE compatible with WebRTC's transport/v4 API",
       "matchManagers": ["gomod"],
       "matchPackageNames": ["github.com/pion/ice/v4"],
