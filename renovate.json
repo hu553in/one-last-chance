@@ -19,11 +19,6 @@
   ],
   "packageRules": [
     {
-      "description": "Group Bun runtime updates",
-      "matchPackageNames": ["@types/bun", "bun", "oven/bun"],
-      "groupName": "Bun runtime"
-    },
-    {
       "description": "Disable automatic TypeScript major updates",
       "matchManagers": ["bun"],
       "matchPackageNames": ["typescript"],
@@ -31,7 +26,7 @@
       "enabled": false
     },
     {
-      "description": "Preserve the Expo-compatible xmldom line",
+      "description": "Keep xmldom compatible with Expo",
       "matchManagers": ["bun"],
       "matchPackageNames": ["@xmldom/xmldom"],
       "allowedVersions": "<0.9.0"
@@ -104,13 +99,13 @@
       "allowedVersions": "<5.1.2"
     },
     {
-      "description": "Preserve owenlivekit's TransferSIPParticipant return type",
+      "description": "Keep LiveKit protocol compatible with owenlivekit's TransferSIPParticipant API",
       "matchManagers": ["gomod"],
       "matchPackageNames": ["github.com/livekit/protocol"],
       "allowedVersions": "<1.51.0"
     },
     {
-      "description": "Keep the final archived olcRTC revision aligned with the server",
+      "description": "Disable automatic olcRTC updates to preserve the shared client and server revision",
       "matchManagers": ["gomod"],
       "matchPackageNames": ["github.com/openlibrecommunity/olcrtc"],
       "enabled": false

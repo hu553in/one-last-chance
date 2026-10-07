@@ -64,8 +64,8 @@ Artifacts are retained for 90 days and are tied to the exact commit shown in the
 5. Use **Refresh** to fetch the saved URL again or **Replace URL** while disconnected.
 6. Open **Logs** when connection diagnostics are needed.
 
-The app keeps the previous working subscription if a refresh or URL replacement fails. Connecting
-uses the saved configuration and does not fetch the subscription again.
+Failed downloads and invalid subscriptions leave the saved configuration unchanged. Connecting uses
+the saved configuration and does not fetch the subscription again.
 
 ## Supported nodes
 

@@ -1,16 +1,12 @@
 {
   "name": "one-last-chance",
   "version": "1.0.0",
+  "private": true,
   "description": "iPhone VPN client for olcRTC, configured through a single subscription URL.",
+  "license": "MIT",
   "author": "Ruslan Khasanshin",
   "repository": "https://github.com/hu553in/one-last-chance",
-  "license": "MIT",
-  "private": true,
-  "engines": {
-    "node": "24.x"
-  },
   "main": "expo-router/entry",
-  "packageManager": "bun@1.4.2",
   "scripts": {
     "dev": "expo start",
     "ios": "bun build:runtime && expo run:ios",
@@ -33,13 +29,13 @@
   },
   "dependencies": {
     "@bacons/apple-targets": "^5.0.0",
-    "expo": "~57.0.26",
+    "expo": "~57.0.27",
     "expo-clipboard": "~57.0.2",
-    "expo-constants": "~57.0.20",
+    "expo-constants": "~57.0.21",
     "expo-font": "~57.0.4",
     "expo-haptics": "~57.0.3",
-    "expo-linking": "~57.0.10",
-    "expo-router": "~57.0.24",
+    "expo-linking": "~57.0.12",
+    "expo-router": "~57.0.25",
     "expo-secure-store": "~57.0.4",
     "expo-splash-screen": "~57.0.9",
     "expo-symbols": "~57.0.3",
@@ -56,14 +52,18 @@
     "eslint": "^10.10.0",
     "eslint-config-expo": "~57.0.2",
     "eslint-config-prettier": "^10.1.8",
-    "knip": "^6.37.0",
+    "knip": "^6.40.0",
     "lefthook": "^2.1.14",
     "prettier": "^3.9.8",
     "tsx": "^4.23.13",
     "typescript": "~6.0.3"
   },
   "overrides": {
-    "@expo/require-utils": "~57.0.5",
+    "@expo/require-utils": "~57.0.6",
     "@xmldom/xmldom": "^0.8.15"
-  }
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "packageManager": "bun@1.4.2"
 }
