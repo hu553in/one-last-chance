@@ -1,6 +1,6 @@
 module github.com/hu553in/one-last-chance/runtime
 
-go 1.27.1
+go 1.27.2
 
 // Keep this revision aligned with the server deployed by hu553in/single-deployment.
 require github.com/openlibrecommunity/olcrtc v0.0.2-0.20260914225731-92b2332769c3
