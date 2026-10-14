@@ -71,7 +71,7 @@ export default function LogsScreen() {
     <>
       <ScrollView
         ref={scrollRef}
-        contentInsetAdjustmentBehavior="automatic"
+        contentInsetAdjustmentBehavior='automatic'
         onContentSizeChange={() => {
           if (followRef.current) scrollRef.current?.scrollToEnd({ animated: false });
         }}
@@ -84,18 +84,18 @@ export default function LogsScreen() {
           {logs || 'No logs yet. Connect once and tunnel events will appear here.'}
         </Text>
       </ScrollView>
-      <Stack.Toolbar placement="right">
+      <Stack.Toolbar placement='right'>
         <Stack.Toolbar.Button
-          accessibilityLabel="Copy logs"
+          accessibilityLabel='Copy logs'
           disabled={!logs}
-          icon="doc.on.doc"
+          icon='doc.on.doc'
           onPress={() => void copy()}
           tintColor={colors.blue}
         />
         <Stack.Toolbar.Button
-          accessibilityLabel="Clear logs"
+          accessibilityLabel='Clear logs'
           disabled={!logs}
-          icon="trash"
+          icon='trash'
           onPress={() => void clear()}
           tintColor={colors.red}
         />

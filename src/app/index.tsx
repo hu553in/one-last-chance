@@ -112,26 +112,26 @@ export default function HomeScreen() {
 
   return (
     <>
-      <Stack.Toolbar placement="right">
+      <Stack.Toolbar placement='right'>
         <Stack.Toolbar.Button
-          accessibilityLabel="Open logs"
-          icon="doc.text.magnifyingglass"
+          accessibilityLabel='Open logs'
+          icon='doc.text.magnifyingglass'
           onPress={() => router.push('/logs')}
           tintColor={colors.blue}
         />
       </Stack.Toolbar>
-      <KeyboardAvoidingView style={styles.flex} behavior="padding">
+      <KeyboardAvoidingView style={styles.flex} behavior='padding'>
         <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          keyboardDismissMode="interactive"
-          keyboardShouldPersistTaps="handled"
+          contentInsetAdjustmentBehavior='automatic'
+          keyboardDismissMode='interactive'
+          keyboardShouldPersistTaps='handled'
           contentContainerStyle={styles.content}
         >
           <View style={styles.statusBlock}>
             <View
               accessible
               accessibilityLabel={`${status.title}. ${status.detail}`}
-              accessibilityRole="summary"
+              accessibilityRole='summary'
               style={styles.statusSummary}
             >
               <SymbolView
@@ -139,7 +139,7 @@ export default function HomeScreen() {
                 name={status.symbol}
                 size={38}
                 tintColor={status.color}
-                weight="semibold"
+                weight='semibold'
                 style={styles.statusSymbol}
               />
               <Text style={styles.statusTitle}>{status.title}</Text>
@@ -163,24 +163,24 @@ export default function HomeScreen() {
               </Text>
               <View style={styles.inputRow}>
                 <TextInput
-                  accessibilityLabel="Subscription URL"
-                  autoCapitalize="none"
+                  accessibilityLabel='Subscription URL'
+                  autoCapitalize='none'
                   autoCorrect={false}
                   editable={!subscriptionUpdateDisabled}
                   enablesReturnKeyAutomatically
-                  inputMode="url"
-                  keyboardType="url"
+                  inputMode='url'
+                  keyboardType='url'
                   onChangeText={setDraftURL}
                   onSubmitEditing={save}
-                  placeholder="https://example.org/sub"
+                  placeholder='https://example.org/sub'
                   placeholderTextColor={colors.secondaryLabel}
-                  returnKeyType="go"
+                  returnKeyType='go'
                   selectionColor={colors.blue}
                   style={styles.input}
                   value={url}
                 />
                 <Pressable
-                  accessibilityRole="button"
+                  accessibilityRole='button'
                   disabled={subscriptionUpdateDisabled}
                   hitSlop={8}
                   onPress={paste}
@@ -192,7 +192,7 @@ export default function HomeScreen() {
               <View style={styles.editorActions}>
                 {summary ? (
                   <Pressable
-                    accessibilityRole="button"
+                    accessibilityRole='button'
                     disabled={vpn.busy}
                     onPress={() => {
                       setEditing(false);
@@ -204,8 +204,8 @@ export default function HomeScreen() {
                   </Pressable>
                 ) : null}
                 <Pressable
-                  accessibilityLabel="Save subscription"
-                  accessibilityRole="button"
+                  accessibilityLabel='Save subscription'
+                  accessibilityRole='button'
                   accessibilityState={{
                     busy: vpn.busy,
                     disabled: saveDisabled,
@@ -218,7 +218,7 @@ export default function HomeScreen() {
                     pressed && styles.pressed,
                   ]}
                 >
-                  {vpn.busy ? <ActivityIndicator color="white" size="small" /> : null}
+                  {vpn.busy ? <ActivityIndicator color='white' size='small' /> : null}
                   <Text style={styles.saveButtonText}>Save</Text>
                 </Pressable>
               </View>
@@ -246,7 +246,7 @@ export default function HomeScreen() {
                 accessibilityLabel={
                   selectedNode ? `Selected node: ${selectedNode.name}` : 'Selected node'
                 }
-                accessibilityRole="button"
+                accessibilityRole='button'
                 accessibilityState={{
                   disabled: summary.nodes.length < 2 || subscriptionUpdateDisabled,
                 }}
@@ -272,7 +272,7 @@ export default function HomeScreen() {
               <View style={styles.divider} />
               <View style={styles.subscriptionActions}>
                 <Pressable
-                  accessibilityRole="button"
+                  accessibilityRole='button'
                   disabled={subscriptionUpdateDisabled}
                   onPress={changeSubscription}
                   style={({ pressed }) => [
@@ -285,7 +285,7 @@ export default function HomeScreen() {
                 </Pressable>
                 <View style={styles.subscriptionActionDivider} />
                 <Pressable
-                  accessibilityRole="button"
+                  accessibilityRole='button'
                   disabled={subscriptionUpdateDisabled}
                   onPress={() => void vpn.refresh()}
                   style={({ pressed }) => [
@@ -301,7 +301,7 @@ export default function HomeScreen() {
           ) : null}
 
           {vpn.error ? (
-            <Text accessibilityRole="alert" selectable style={styles.errorText}>
+            <Text accessibilityRole='alert' selectable style={styles.errorText}>
               {vpn.error}
             </Text>
           ) : null}
@@ -309,7 +309,7 @@ export default function HomeScreen() {
         <View style={[styles.footer, { paddingBottom: Math.max(insets.bottom, spacing.x3) }]}>
           <Pressable
             accessibilityLabel={disconnectActionVisible ? 'Disconnect' : 'Connect'}
-            accessibilityRole="button"
+            accessibilityRole='button'
             accessibilityState={{ busy: isDisconnecting, disabled: connectionDisabled }}
             disabled={connectionDisabled}
             onPress={toggle}
@@ -320,7 +320,7 @@ export default function HomeScreen() {
               pressed && styles.connectionPressed,
             ]}
           >
-            {isDisconnecting ? <ActivityIndicator color="white" size="small" /> : null}
+            {isDisconnecting ? <ActivityIndicator color='white' size='small' /> : null}
             <Text style={styles.connectionButtonText}>
               {isDisconnecting ? 'Disconnecting' : canDisconnect ? 'Disconnect' : 'Connect'}
             </Text>
@@ -385,22 +385,22 @@ function PublicIPAddress() {
             : 'IP unavailable'}
       </Text>
       <Pressable
-        accessibilityLabel="Refresh public IP"
-        accessibilityRole="button"
+        accessibilityLabel='Refresh public IP'
+        accessibilityRole='button'
         accessibilityState={{ busy: isLoading, disabled: isLoading }}
         disabled={isLoading}
         onPress={refresh}
         style={({ pressed }) => [styles.publicIPRefresh, pressed && styles.pressed]}
       >
         {isLoading ? (
-          <ActivityIndicator color={colors.secondaryLabel} size="small" />
+          <ActivityIndicator color={colors.secondaryLabel} size='small' />
         ) : (
           <SymbolView
             accessibilityElementsHidden
-            name="arrow.clockwise"
+            name='arrow.clockwise'
             size={20}
             tintColor={colors.blue}
-            weight="semibold"
+            weight='semibold'
           />
         )}
       </Pressable>

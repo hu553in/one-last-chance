@@ -36,9 +36,9 @@ jobs:
       - uses: hu553in/common-things/.github/actions/setup-shfmt@main
       - run: bun ci
       - uses: hu553in/common-things/.github/actions/cache-eslint@main
-      - run: bun check
-        env:
+      - env:
           GITHUB_TOKEN: ${{ github.token }}
+        run: bun check
       - uses: actions/upload-artifact@v7
         with:
           name: one-last-chance-unsigned-${{ github.sha }}

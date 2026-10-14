@@ -16,13 +16,13 @@ export default function RootLayout() {
         }}
       >
         <Stack.Screen
-          name="index"
+          name='index'
           options={{
             title: 'One Last Chance',
             headerLargeTitle: true,
           }}
         />
-        <Stack.Screen name="logs" options={{ title: 'Logs' }} />
+        <Stack.Screen name='logs' options={{ title: 'Logs' }} />
       </Stack>
     </ThemeProvider>
   );
