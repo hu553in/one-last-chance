@@ -32,6 +32,12 @@
       "allowedVersions": "<0.9.0"
     },
     {
+      "description": "Keep Expo Doctor compatible with Icon Composer",
+      "matchManagers": ["bun"],
+      "matchPackageNames": ["expo-doctor"],
+      "allowedVersions": "<1.21.0"
+    },
+    {
       "description": "Group Expo SDK updates",
       "matchManagers": ["bun"],
       "matchPackageNames": [
@@ -44,7 +50,8 @@
         "expo-*",
         "react",
         "react-native",
-        "react-native-*"
+        "react-native-*",
+        "!expo-doctor"
       ],
       "groupName": "Expo SDK"
     },
@@ -56,7 +63,8 @@
         "@expo/**",
         "eslint-config-expo",
         "expo",
-        "expo-*"
+        "expo-*",
+        "!expo-doctor"
       ],
       "matchUpdateTypes": ["major"],
       "enabled": false
