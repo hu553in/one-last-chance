@@ -142,8 +142,8 @@ github.com/owenewans/owenlivekit/v2 v2.18.2 h1:O9dehD2jv4PY5XftUOESAQxQi/nnRFRpJ
 github.com/owenewans/owenlivekit/v2 v2.18.2/go.mod h1:ZLiVy3/XevpcF6NJcll3RcHjhAcquBBq+428/qofEi4=
 github.com/pion/datachannel v1.6.3 h1:HZAYLpunVI0xi057ZiANl558d0uSpomcWw4UEPz3qXs=
 github.com/pion/datachannel v1.6.3/go.mod h1:oRmkXVVXxkUbqa8MatgdNHW29kvtQY3HUdjJQsfv2GE=
-github.com/pion/dtls/v3 v3.1.13 h1:oWNjsoF3xUPDhzOuE8U42ql1BtVzWc8X4Asiz9BKwYk=
-github.com/pion/dtls/v3 v3.1.13/go.mod h1:iKFQNYrjsN2TiA2YKKMqB9MOZaFpjFULBI/A4sW0eyc=
+github.com/pion/dtls/v3 v3.1.14 h1:GYLEMc4IKGL29lWRJux6zUf0XwwPxlsZ7RUlGk8DLsI=
+github.com/pion/dtls/v3 v3.1.14/go.mod h1:iKFQNYrjsN2TiA2YKKMqB9MOZaFpjFULBI/A4sW0eyc=
 github.com/pion/ice/v4 v4.4.2 h1:asS17nbHJrzlVQl8fiSJaipxrxSY3Dq6DWgmB+0VwpI=
 github.com/pion/ice/v4 v4.4.2/go.mod h1:YZgNFOyJWXpLpLj0mb4ccqNAWRo9C2RtqKwuVTEz0Sc=
 github.com/pion/interceptor v0.1.49 h1:iyBsNHRoLNNXZiJA/DdGvJgdyfS8YWDCzxIAlVjt5nY=
@@ -278,8 +278,8 @@ golang.org/x/sys v0.0.0-20190412213103-97732733099d/go.mod h1:h1NjWce9XRLGQEsW7w
 golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.49.0 h1:XbzkgYJHdqh/8m2Uu0W/dQv8nktxx4BFHp1M0gROTXA=
 golang.org/x/sys v0.49.0/go.mod h1:hNLxWAXmnKAxqDtdwIYC4bM9oQPEecfsnNMuSxOs3og=
-golang.org/x/telemetry v0.0.0-20261015160703-b2e8be0732e6 h1:6B+3g2Qph8NtkGP8hNi2cYzQGiUhTlH0U0GCwBtBWNI=
-golang.org/x/telemetry v0.0.0-20261015160703-b2e8be0732e6/go.mod h1:GNu+nb+E5axfGmP+Uu3ZVQu5lE/Xk42MjZOHWUD94/o=
+golang.org/x/telemetry v0.0.0-20261016163328-824aa3d1d8dd h1:8zu7mICKksE3/PmcOx2TNeExNKN2CpkIe+9sZpINOPM=
+golang.org/x/telemetry v0.0.0-20261016163328-824aa3d1d8dd/go.mod h1:GNu+nb+E5axfGmP+Uu3ZVQu5lE/Xk42MjZOHWUD94/o=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
 golang.org/x/text v0.3.3/go.mod h1:5Zoc/QRtKVWzQhOtBMvqHzDpF6irO9z98xDceosuGiQ=
 golang.org/x/text v0.43.0 h1:1QivrlhwAsnMOcqgOdl9my7s9OyZl8O5/UGUTJVXoWc=
