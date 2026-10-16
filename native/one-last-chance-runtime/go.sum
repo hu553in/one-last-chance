@@ -142,8 +142,8 @@ github.com/owenewans/owenlivekit/v2 v2.18.2 h1:O9dehD2jv4PY5XftUOESAQxQi/nnRFRpJ
 github.com/owenewans/owenlivekit/v2 v2.18.2/go.mod h1:ZLiVy3/XevpcF6NJcll3RcHjhAcquBBq+428/qofEi4=
 github.com/pion/datachannel v1.6.3 h1:HZAYLpunVI0xi057ZiANl558d0uSpomcWw4UEPz3qXs=
 github.com/pion/datachannel v1.6.3/go.mod h1:oRmkXVVXxkUbqa8MatgdNHW29kvtQY3HUdjJQsfv2GE=
-github.com/pion/dtls/v3 v3.1.12 h1:arwww8bAMSOos1HZyaohQGdPhIrJrzZOlzMnoOMJsHk=
-github.com/pion/dtls/v3 v3.1.12/go.mod h1:iKFQNYrjsN2TiA2YKKMqB9MOZaFpjFULBI/A4sW0eyc=
+github.com/pion/dtls/v3 v3.1.13 h1:oWNjsoF3xUPDhzOuE8U42ql1BtVzWc8X4Asiz9BKwYk=
+github.com/pion/dtls/v3 v3.1.13/go.mod h1:iKFQNYrjsN2TiA2YKKMqB9MOZaFpjFULBI/A4sW0eyc=
 github.com/pion/ice/v4 v4.4.2 h1:asS17nbHJrzlVQl8fiSJaipxrxSY3Dq6DWgmB+0VwpI=
 github.com/pion/ice/v4 v4.4.2/go.mod h1:YZgNFOyJWXpLpLj0mb4ccqNAWRo9C2RtqKwuVTEz0Sc=
 github.com/pion/interceptor v0.1.49 h1:iyBsNHRoLNNXZiJA/DdGvJgdyfS8YWDCzxIAlVjt5nY=
