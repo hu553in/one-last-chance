@@ -42,7 +42,7 @@ require (
 	github.com/nats-io/nats.go v1.54.0 // indirect
 	github.com/owenewans/owenlivekit/v2 v2.18.2 // indirect
 	github.com/pion/datachannel v1.6.3 // indirect
-	github.com/pion/dtls/v3 v3.1.13 // indirect
+	github.com/pion/dtls/v3 v3.1.14 // indirect
 	github.com/pion/ice/v4 v4.4.2 // indirect
 	github.com/pion/interceptor v0.1.49 // indirect
 	github.com/pion/logging v0.2.4 // indirect
@@ -86,7 +86,7 @@ require (
 	golang.org/x/net v0.61.0 // indirect
 	golang.org/x/sync v0.24.0 // indirect
 	golang.org/x/sys v0.49.0 // indirect
-	golang.org/x/telemetry v0.0.0-20261015160703-b2e8be0732e6 // indirect
+	golang.org/x/telemetry v0.0.0-20261016163328-824aa3d1d8dd // indirect
 	golang.org/x/text v0.43.0 // indirect
 	golang.org/x/time v0.16.0 // indirect
 	golang.org/x/tools v0.52.0 // indirect
