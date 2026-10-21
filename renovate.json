@@ -83,6 +83,12 @@
       "enabled": false
     },
     {
+      "description": "Disable automatic mediatransportutil updates",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": ["github.com/livekit/mediatransportutil"],
+      "enabled": false
+    },
+    {
       "description": "Keep WebRTC compatible with olcRTC's transport/v4 API",
       "matchManagers": ["gomod"],
       "matchPackageNames": ["github.com/pion/webrtc/v4"],
@@ -113,7 +119,7 @@
       "allowedVersions": "<1.51.0"
     },
     {
-      "description": "Disable automatic olcRTC updates to preserve the shared client and server revision",
+      "description": "Disable automatic olcRTC updates",
       "matchManagers": ["gomod"],
       "matchPackageNames": ["github.com/openlibrecommunity/olcrtc"],
       "enabled": false
