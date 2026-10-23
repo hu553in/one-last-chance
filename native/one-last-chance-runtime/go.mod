@@ -39,7 +39,7 @@ require (
 	github.com/magefile/mage v1.17.2 // indirect
 	github.com/makiuchi-d/gozxing v0.1.1 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
-	github.com/nats-io/nats.go v1.54.0 // indirect
+	github.com/nats-io/nats.go v1.55.0 // indirect
 	github.com/owenewans/owenlivekit/v2 v2.18.2 // indirect
 	github.com/pion/datachannel v1.6.3 // indirect
 	github.com/pion/dtls/v3 v3.1.15 // indirect
