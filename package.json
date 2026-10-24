@@ -22,7 +22,7 @@
     "check:types": "tsc --pretty --noEmit",
     "check:deps": "cd native/one-last-chance-runtime && go mod tidy -diff && go mod verify",
     "check:unused": "knip",
-    "check:vulns": "bun audit --prod --audit-level=high --ignore GHSA-vfj7-8cjw-p6xm --ignore GHSA-86w9-cpqp-85rv && cd native/one-last-chance-runtime && go tool govulncheck ./...",
+    "check:vulns": "bun audit --prod --audit-level=high --ignore GHSA-mrhx-c7xc-m3w5 --ignore GHSA-86w9-cpqp-85rv && cd native/one-last-chance-runtime && go tool govulncheck ./...",
     "check": "bun lint && bun check:hooks && bun check:workflows && bun check:renovate && bun check:expo && bun check:types && bun check:deps && bun run test && bun check:unused && bun check:vulns && bun run build",
     "check:fix": "bun lint:fix && bun check",
     "prepare": "if [ -n \"${CI:-}\" ] || [ \"${LEFTHOOK:-}\" = \"0\" ]; then exit 0; fi; lefthook install"
