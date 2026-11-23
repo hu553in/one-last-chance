@@ -13,58 +13,63 @@
     "build": "bash ./scripts/build-unsigned-ipa.sh",
     "build:runtime": "bash ./scripts/build-runtime.sh",
     "test": "tsx --test src/**/*.test.ts && cd native/one-last-chance-runtime && go test -race ./...",
-    "lint": "prettier -u -c . && eslint --cache --cache-location .cache/eslint --cache-strategy content --max-warnings 0 . && shfmt -d scripts/*.sh && bunx shellcheck scripts/*.sh && xcrun swift-format lint --strict --recursive modules/olcrtc-vpn/ios native/olcrtc-tunnel-core/Sources targets/networkpackettunnel && cd native/one-last-chance-runtime && golangci-lint fmt --diff && golangci-lint run",
+    "lint": "prettier -u -c . && eslint --cache --cache-location .cache/eslint --cache-strategy content --max-warnings 0 . && shfmt -d scripts/*.sh && bunx --minimum-release-age 259200 shellcheck scripts/*.sh && xcrun swift-format lint --strict --recursive modules/olcrtc-vpn/ios native/olcrtc-tunnel-core/Sources targets/networkpackettunnel && cd native/one-last-chance-runtime && golangci-lint fmt --diff && golangci-lint run",
     "lint:fix": "prettier -u -w . && eslint --cache --cache-location .cache/eslint --cache-strategy content --max-warnings 0 --fix . && shfmt -w scripts/*.sh && xcrun swift-format format --in-place --recursive modules/olcrtc-vpn/ios native/olcrtc-tunnel-core/Sources targets/networkpackettunnel && cd native/one-last-chance-runtime && golangci-lint fmt && golangci-lint run --fix",
     "check:hooks": "lefthook validate",
-    "check:workflows": "bunx github-actionlint",
-    "check:renovate": "bunx --package renovate renovate-config-validator --strict --no-global renovate.json",
+    "check:workflows": "bunx --minimum-release-age 259200 github-actionlint",
     "check:expo": "expo-doctor",
     "check:types": "tsc --pretty --noEmit",
     "check:deps": "cd native/one-last-chance-runtime && go mod tidy -diff && go mod verify",
     "check:unused": "knip",
-    "check:vulns": "bun audit --prod --audit-level=high --ignore GHSA-mrhx-c7xc-m3w5 --ignore GHSA-qr28-fpjm-wq7f && cd native/one-last-chance-runtime && go tool govulncheck ./...",
-    "check": "bun lint && bun check:hooks && bun check:workflows && bun check:renovate && bun check:expo && bun check:types && bun check:deps && bun run test && bun check:unused && bun check:vulns && bun run build",
+    "check:vulns": "bun audit --prod --audit-level=high && cd native/one-last-chance-runtime && go tool govulncheck ./...",
+    "check": "bun lint && bun check:hooks && bun check:workflows && bun check:expo && bun check:types && bun check:deps && bun run test && bun check:unused && bun check:vulns && bun run build",
     "check:fix": "bun lint:fix && bun check",
     "prepare": "if [ -n \"${CI:-}\" ] || [ \"${LEFTHOOK:-}\" = \"0\" ]; then exit 0; fi; lefthook install"
   },
   "dependencies": {
     "@bacons/apple-targets": "^5.0.0",
-    "expo": "~57.0.31",
-    "expo-clipboard": "~57.0.2",
-    "expo-constants": "~57.0.22",
-    "expo-font": "~57.0.4",
-    "expo-haptics": "~57.0.3",
-    "expo-linking": "~57.0.13",
-    "expo-router": "~57.0.29",
-    "expo-secure-store": "~57.0.4",
-    "expo-splash-screen": "~57.0.10",
-    "expo-symbols": "~57.0.3",
-    "react": "19.2.3",
-    "react-native": "0.86.3",
-    "react-native-safe-area-context": "~5.7.0",
-    "react-native-screens": "~4.26.2",
-    "zod": "^4.6.5"
+    "expo": "~58.0.26",
+    "expo-clipboard": "~58.0.4",
+    "expo-constants": "~58.0.16",
+    "expo-font": "~58.0.12",
+    "expo-haptics": "~58.0.8",
+    "expo-linking": "~58.0.17",
+    "expo-router": "~58.0.32",
+    "expo-secure-store": "~58.0.3",
+    "expo-splash-screen": "~58.0.14",
+    "expo-symbols": "~58.0.5",
+    "react": "19.3.0",
+    "react-native": "0.88.1",
+    "react-native-safe-area-context": "~5.11.1",
+    "react-native-screens": "~4.30.1",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@react-native/metro-config": "0.86.3",
-    "@types/node": "^24.13.5",
-    "@types/react": "~19.2.18",
-    "eslint": "^10.10.0",
-    "eslint-config-expo": "~57.0.2",
+    "@react-native/metro-config": "0.88.1",
+    "@types/node": "^26.6.6",
+    "@types/react": "~19.3.0",
+    "eslint": "^10.15.0",
+    "eslint-config-expo": "~58.0.4",
     "eslint-config-prettier": "^10.1.8",
-    "expo-doctor": "1.20.4",
-    "knip": "^6.40.0",
-    "lefthook": "^2.1.14",
-    "prettier": "^3.9.8",
-    "tsx": "^4.23.13",
+    "expo-doctor": "1.21.8",
+    "knip": "^6.48.0",
+    "lefthook": "^2.2.2",
+    "prettier": "^3.10.1",
+    "tsx": "^4.23.15",
     "typescript": "~6.0.3"
   },
   "overrides": {
-    "@expo/require-utils": "~57.0.6",
-    "@xmldom/xmldom": "^0.8.15"
+    "@bacons/xcode": {
+      "uuid": "^11.1.1"
+    },
+    "@expo/fingerprint": {
+      "minimatch": "^11.0.1"
+    },
+    "@xmldom/xmldom": "^0.8.15",
+    "glob@>=9 <14.0.2": "^14.0.2"
   },
   "engines": {
-    "node": "24.x"
+    "node": "26.x"
   },
-  "packageManager": "bun@1.4.4"
+  "packageManager": "bun@1.4.5"
 }

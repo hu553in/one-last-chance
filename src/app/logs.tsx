@@ -7,6 +7,7 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
   ScrollView,
+  type ScrollViewInstance,
   StyleSheet,
   Text,
 } from 'react-native';
@@ -17,7 +18,7 @@ import { colors, spacing } from '@/theme';
 
 export default function LogsScreen() {
   const [logs, setLogs] = useState('');
-  const scrollRef = useRef<ScrollView>(null);
+  const scrollRef = useRef<ScrollViewInstance>(null);
   const followRef = useRef(true);
   const loadVersionRef = useRef(0);
 

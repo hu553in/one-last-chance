@@ -128,7 +128,7 @@ It is not derived from the phone's hardware identifier.
 ## Compatibility
 
 The client pins olcRTC commit
-[`92b2332769c3dd5000584366201572efc448065f`](https://github.com/openlibrecommunity/olcrtc/commit/92b2332769c3dd5000584366201572efc448065f),
+[`f3ad8fb7c0d0fa981423f83269526fa94077c23d`](https://github.com/openlibrecommunity/olcrtc/commit/f3ad8fb7c0d0fa981423f83269526fa94077c23d),
 the final revision of the archived upstream repository. Its OLC2 protocol is incompatible with the
 previously pinned client and server. Upgrade both sides together; existing subscription keys and
 device IDs are preserved.
