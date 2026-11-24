@@ -1,6 +1,5 @@
 const { defineConfig, globalIgnores } = require('eslint/config');
 const expoConfig = require('eslint-config-expo/flat');
-const eslintConfigPrettier = require('eslint-config-prettier/flat');
 
 module.exports = defineConfig([
   expoConfig,
@@ -8,7 +7,6 @@ module.exports = defineConfig([
     '.cache/**',
     '.expo/**',
     'build/**',
-    'coverage/**',
     'dist/**',
     'ios/**',
     'native/olcrtc-tunnel-core/Frameworks/**',
@@ -19,9 +17,8 @@ module.exports = defineConfig([
     },
     settings: {
       react: {
-        version: '19',
+        version: require('react/package.json').version,
       },
     },
   },
-  eslintConfigPrettier,
 ]);

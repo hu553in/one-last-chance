@@ -5,7 +5,8 @@ project_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 build_dir="$project_dir/build"
 archive_path="$build_dir/OneLastChance.xcarchive"
 distribution_dir="$project_dir/dist"
-ipa_path="$distribution_dir/OneLastChance-unsigned.ipa"
+ipa_name=OneLastChance-unsigned.ipa
+ipa_path="$distribution_dir/$ipa_name"
 
 for command_name in bun node pod xcodebuild; do
   command -v "$command_name" >/dev/null || {
@@ -71,8 +72,9 @@ if [[ -z "$application_path" ]]; then
   exit 1
 fi
 
-stage_dir="$(mktemp -d "${TMPDIR:-/tmp}/one-last-chance-ipa.XXXXXX")"
+stage_dir="$(mktemp -d "$build_dir/ipa.XXXXXX")"
 trap 'rm -rf "$stage_dir"' EXIT
+staged_ipa_path="$stage_dir/$ipa_name"
 mkdir -p "$stage_dir/Payload"
 staged_application_path="$stage_dir/Payload/$(basename "$application_path")"
 /usr/bin/ditto "$application_path" "$staged_application_path"
@@ -80,11 +82,11 @@ find "$stage_dir/Payload" -type d -name _CodeSignature -prune -exec rm -rf {} +
 find "$stage_dir/Payload" -type f -name embedded.mobileprovision -delete
 find "$staged_application_path/PlugIns" -type f -name pods.rb -delete
 
-rm -f "$ipa_path"
 (
   cd "$stage_dir"
-  /usr/bin/zip -qry "$ipa_path" Payload
+  /usr/bin/zip -qry "$staged_ipa_path" Payload
 )
 
-"$project_dir/scripts/verify-unsigned-ipa.sh" "$ipa_path"
+"$project_dir/scripts/verify-unsigned-ipa.sh" "$staged_ipa_path"
+mv -f "$staged_ipa_path" "$ipa_path"
 echo "Unsigned IPA: $ipa_path"

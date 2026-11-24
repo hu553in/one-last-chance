@@ -40,20 +40,16 @@ mobile runtime; SOCKS and routing details stay out of the user interface.
 The app does not install or administer an olcRTC server. Obtain the server and subscription URL
 separately.
 
-## Install the CI build
+## Install the app
 
-Every successful CI run uploads a ready-to-sign IPA:
+Build `dist/OneLastChance-unsigned.ipa` using the [source instructions](#build-from-source). Sign
+the IPA with a certificate and provisioning profile that permit a Packet Tunnel Provider, then
+install it on the iPhone.
 
-1. Sign in to GitHub, open the
-   [CI runs for `main`](https://github.com/hu553in/one-last-chance/actions/workflows/ci.yml?query=branch%3Amain),
-   and select the latest successful run.
-2. In **Artifacts**, download `one-last-chance-unsigned-<commit SHA>`.
-3. Extract the outer archive downloaded from GitHub. It contains `OneLastChance-unsigned.ipa`; do
-   not extract the IPA itself.
-4. Sign the IPA with a certificate and provisioning profile that permit a Packet Tunnel Provider,
-   and install it on the iPhone.
-
-Artifacts are retained for 90 days and are tied to the exact commit shown in the workflow run.
+If a
+[CI run](https://github.com/hu553in/one-last-chance/actions/workflows/ci.yml?query=branch%3Amain)
+has a `one-last-chance-unsigned-<commit SHA>` artifact, extract `OneLastChance-unsigned.ipa` from
+the downloaded archive and sign it the same way. CI artifacts expire after 90 days.
 
 ## Usage
 
@@ -169,9 +165,11 @@ bun check
 - `bun dev` starts Expo development tools.
 - `bun ios` builds the Go runtime, then generates and runs the iOS app locally.
 - `bun run test` runs TypeScript unit tests and Go runtime tests with the race detector.
-- `bun check` runs formatting, linting, configuration validation, Expo Doctor, TypeScript, tests, Go
-  checks, unused-code analysis, dependency audits, and the complete unsigned IPA build.
-- `bun check:fix` applies formatter and linter fixes before running the same full gate.
+- `bun check:local` runs lint, configuration and type checks, Expo Doctor, tests, unused-code
+  analysis, and dependency checks. The pre-commit hook applies lint fixes first, then runs
+  `check:local`.
+- `bun check` runs those checks and builds the unsigned IPA. CI uses this command.
+- `bun check:fix` applies formatting and lint fixes before running `bun check`.
 
 The unsigned IPA and Simulator build validate packaging and native linking. Only a signed build on a
 physical iPhone can validate NetworkExtension, device routes, and Safari traffic end to end.

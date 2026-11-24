@@ -33,9 +33,9 @@ jobs:
       - uses: golangci/golangci-lint-action@v9
         with:
           install-only: true
+      - run: golangci-lint config verify
       - uses: hu553in/common-things/.github/actions/setup-shfmt@main
       - run: bun ci
-      - uses: hu553in/common-things/.github/actions/cache-eslint@main
       - env:
           GITHUB_TOKEN: ${{ github.token }}
         run: bun check
